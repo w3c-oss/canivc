@@ -222,11 +222,13 @@ function implementersOfSpecs(results) {
   results.forEach(result => {
     const specTitle = result.respecConfig?.title || result.title || '';
     const specShort = result.respecConfig?.shortName || '';
+    const specGroup = result.respecConfig?.group;
     (result.matrices || []).forEach(matrix => {
       (matrix.suites || []).forEach(suite => {
         const vendor = removeNameSuffix(suite.title);
         if(!map[vendor]) {
           map[vendor] = {
+            groups: new Set(),
             specs: [],
             totals: {passed: 0, failed: 0, pending: 0, total: 0}
           };
@@ -241,9 +243,11 @@ function implementersOfSpecs(results) {
           specEntry = {
             title: specTitle,
             shortName: specShort,
+            group: specGroup,
             stats: {passed: 0, failed: 0, pending: 0, total: 0}
           };
           map[vendor].specs.push(specEntry);
+          map[vendor].groups.add(specGroup);
         }
 
         // aggregate counts from this suite into the spec entry
@@ -269,6 +273,8 @@ function implementersOfSpecs(results) {
   });
   Object.values(map).forEach(v => {
     v.specs.sort((a, b) => a.title.localeCompare(b.title));
+    // turn groups into an array for JSON serialization
+    v.groups = Array.from(v.groups).sort();
   });
   return map;
 }

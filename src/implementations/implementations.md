@@ -12,7 +12,19 @@ eleventyComputed:
 {% assign info = implementations[vendor] %}
 {% assign testCategories = results.testsByCompany[vendor] %}
 
-<h1 style="text-align: center">{{ vendor }}</h1>
+<h1 class="ui centered header" style="padding-left: 2.5em">
+  {{ vendor }}
+  <div class="ui simple right floated icon dropdown button">
+    <i class="cogs icon"></i>
+    <div class="left menu">
+      {%- for group in results.implementersOfSpecs[vendor].groups reversed -%}
+      <a class="item" href="https://github.com/{{ group }}/vc-test-suite-implementations/blob/main/implementations/{{ vendor | replace: ', Inc.', '' | replace: ' ', '' }}.json" target="_blank" rel="noopener">
+        {{ group }}
+      </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</h1>
 
 <div class="ui very padded segment">
   <!-- Spider Chart -->
