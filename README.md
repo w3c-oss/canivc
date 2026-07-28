@@ -1,4 +1,4 @@
-# Can I Verifiable Credential?
+# Can I VC?
 
 ## Contributing
 Contributions are welcome and encouraged!  Please follow [best practices for contributing to open-source code on GitHub](https://docs.github.com/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).
@@ -21,4 +21,5 @@ Credential Community Group test suite report results. The list of currently
 configured test suite report URLs can be found in `src/_data/results.js`.
 
 ## License
-[BSD-3-Clause](LICENSE.md) © 2023 Digital Bazaar, Inc.
+
+The original license of the project was [BSD-3-Clause](LICENSE.md) © 2023 Digital Bazaar, Inc. However, W3C is investigating new licensing.
