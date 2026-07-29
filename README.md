@@ -22,4 +22,4 @@ configured test suite report URLs can be found in `src/_data/results.js`.
 
 ## License
 
-The original license of the project was [BSD-3-Clause](LICENSE.md) © 2023 Digital Bazaar, Inc. However, W3C is investigating new licensing.
+[BSD-3-Clause](LICENSE.md) © 2023 Digital Bazaar, Inc.
