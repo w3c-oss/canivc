@@ -21,5 +21,4 @@ Credential Community Group test suite report results. The list of currently
 configured test suite report URLs can be found in `src/_data/results.js`.
 
 ## License
-
 [BSD-3-Clause](LICENSE.md) © 2023 Digital Bazaar, Inc.
