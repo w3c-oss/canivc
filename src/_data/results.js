@@ -1,4 +1,16 @@
 import EleventyFetch from '@11ty/eleventy-fetch';
+import {fileURLToPath} from 'node:url';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+
+// Set CANIVC_LOCAL_REPORTS=1 to read each suite's report from a sibling
+// checkout's `reports/index.json` (as laid out under `workspace/projects/`)
+// instead of fetching the published copy. Suites without a local sibling
+// report fall back to the remote URL.
+const useLocalReports = ['1', 'true'].includes(
+  process.env.CANIVC_LOCAL_REPORTS);
+const siblingReposDir = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const specUrls = [
   'https://w3c.github.io/vc-data-model-2.0-test-suite/index.json',
@@ -279,15 +291,49 @@ function implementersOfSpecs(results) {
   return map;
 }
 
+/**
+ * Reads a suite's report from its sibling checkout's `reports/index.json`
+ * (the file `npm test` writes locally), falling back to `null` if that
+ * repo isn't checked out as a sibling or hasn't been tested locally.
+ *
+ * @param {string} url - The suite's published report URL, e.g.
+ *   `https://w3c.github.io/vc-di-ecdsa-test-suite/index.json`.
+ * @returns {Promise<object|null>} Parsed report, or null if unavailable.
+ */
+async function readLocalReport(url) {
+  const repoName = new URL(url).pathname.split('/').filter(Boolean)[0];
+  const reportPath = path.join(
+    siblingReposDir, repoName, 'reports', 'index.json');
+  try {
+    return JSON.parse(await fs.readFile(reportPath, 'utf8'));
+  } catch(e) {
+    if(e.code !== 'ENOENT') {
+      throw e;
+    }
+    return null;
+  }
+}
+
+/**
+ * Fetches one suite's report, from a local sibling checkout when
+ * `CANIVC_LOCAL_REPORTS` is set and a local report is available, otherwise
+ * from the published URL (cached for a week).
+ *
+ * @param {string} url - The suite's published report URL.
+ * @returns {Promise<object>} Parsed report.
+ */
+async function fetchReport(url) {
+  const local = useLocalReports ? await readLocalReport(url) : null;
+  return local ?? EleventyFetch(url, {
+    duration: '1w', // save for 1 week
+    type: 'json' // we’ll parse JSON for you
+  });
+}
+
 // Repeated fetch
 export default async function() {
   /* This returns a promise */
-  const promises = specUrls.map(url =>
-    EleventyFetch(url, {
-      duration: '1w', // save for 1 week
-      type: 'json' // we’ll parse JSON for you
-    })
-  );
+  const promises = specUrls.map(fetchReport);
 
   let results = await Promise.allSettled(promises);
 
