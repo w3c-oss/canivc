@@ -26,7 +26,7 @@ CLOUDFLARE_TOKEN=<api-token> npm run deploy:status
 - `CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_PROJECT_ID` can override the defaults
   below if this is ever reused for another project.
 
-## Logs API Endpoints
+## Deployment listing API endpoint
 
 All URLs need the following values:
 ACCOUNT_ID = '421b5cd79fe829ed9ffea49c38b4be4a'
@@ -35,7 +35,8 @@ PROJECT_ID = 'canivc'
 A `GET` request to the deployments list is URL...
 https://api.cloudflare.com/client/v4/accounts/421b5cd79fe829ed9ffea49c38b4be4a/pages/projects/canivc/deployments
 
-...results in the following payload:
+<details>
+<summary>...results in the following payload:</summary>
 
 ```json
 {
@@ -1308,6 +1309,8 @@ https://api.cloudflare.com/client/v4/accounts/421b5cd79fe829ed9ffea49c38b4be4a/p
 }
 ```
 
+</details>
+
 If the local branch is up-to-date with the PR (and vice-versa), the latest
 local git SHA can be found in the `deployment_trigger.metadata.commit_hash`.
 
@@ -1316,12 +1319,13 @@ out branch (assuming it's pushed to a PR) and be able to look up the logs for
 that build by finding the build ID related to that `commit_hash` and build the
 log retrieval URL (as shown below).
 
-# Logs for a specific deployment
+## Log listing endpoint
 
 The `result.id` can be used with the logs endpoint at a URL like...
-ttps://api.cloudflare.com/client/v4/accounts/421b5cd79fe829ed9ffea49c38b4be4a/pages/projects/canivc/deployments/3e91911c-6fbd-4d17-8ee0-efada4d5e012/history/logs
+https://api.cloudflare.com/client/v4/accounts/421b5cd79fe829ed9ffea49c38b4be4a/pages/projects/canivc/deployments/3e91911c-6fbd-4d17-8ee0-efada4d5e012/history/logs
 
-The response of which would be...
+<details>
+<summary>The response of which would be...</summary>
 
 ```json
 {
@@ -2052,3 +2056,5 @@ The response of which would be...
   "messages": []
 }
 ```
+
+</details>
