@@ -8,6 +8,24 @@ Cloudflare API.
 
 Consequently, they do not show up on GitHub when a build fails.
 
+# Checking status from the command line
+
+[scripts/deploy-status.mjs](scripts/deploy-status.mjs) wraps the endpoints
+below. Run it from a checked out branch to see that branch's latest deploy
+status and logs, without going to the Cloudflare Dashboard:
+
+```sh
+CLOUDFLARE_TOKEN=<api-token> npm run deploy:status
+```
+
+- `CLOUDFLARE_TOKEN` (required) — a Cloudflare API token with Pages read
+  access, sent as `Authorization: Bearer` on every request.
+- Matches the deployment for the current git branch and commit; if HEAD
+  hasn't been built yet, it falls back to the branch's most recent deployment
+  and says so.
+- `CLOUDFLARE_ACCOUNT_ID` / `CLOUDFLARE_PROJECT_ID` can override the defaults
+  below if this is ever reused for another project.
+
 ## Logs API Endpoints
 
 All URLs need the following values:
