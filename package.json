@@ -7,6 +7,7 @@
     "build": "eleventy",
     "build:local": "CANIVC_LOCAL_REPORTS=1 eleventy",
     "lint": "eslint",
+    "deploy:status": "node scripts/deploy-status.mjs",
     "serve": "rm -rf _site/ && eleventy --serve",
     "serve:local": "rm -rf _site/ && CANIVC_LOCAL_REPORTS=1 eleventy --serve",
     "start": "rm -rf _site/ && eleventy --serve",
