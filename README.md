@@ -1,5 +1,13 @@
 # Can I VC?
 
+[canivc.com](https://canivc.com/) is a community dashboard aggregating the
+test suite results of various W3C Verifiable Credentials related test suites.
+
+The
+[Can I VC Project](https://github.com/w3c-oss/open-source-program/blob/main/projects/canivc/README.md)
+is part of the
+[W3C's Open Source Program](https://github.com/w3c-oss/open-source-program).
+
 ## Contributing
 Contributions are welcome and encouraged!  Please follow [best practices for contributing to open-source code on GitHub](https://docs.github.com/en/get-started/exploring-projects-on-github/finding-ways-to-contribute-to-open-source-on-github).
 
