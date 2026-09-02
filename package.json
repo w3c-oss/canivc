@@ -20,8 +20,18 @@
     "crypto",
     "tests"
   ],
-  "author": "Digital Bazaar, Inc.",
-  "license": "BSD-3-Clause",
+  "author": {
+    "name": "W3C, Inc.",
+    "url": "https://w3.org/"
+  },
+  "contributors": [
+    {
+      "name": "Benjamin Young",
+      "email": "byoung@digitalbazaar.com",
+      "url": "https://digitalbazaar.com/"
+    }
+  ],
+  "license": "Apache-2.0",
   "devDependencies": {
     "@11ty/eleventy": "^3.1.2",
     "@11ty/eleventy-fetch": "^5.1.0",

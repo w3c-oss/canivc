@@ -55,4 +55,4 @@ someone who can do these same actions in the UI, of course).
 Run either script with `--help` for full usage.
 
 ## License
-[BSD-3-Clause](LICENSE.md) © 2023 Digital Bazaar, Inc.
+[Apache-2.0](LICENSE) © 2026 W3C, Inc. (2023-2026 Digital Bazaar, Inc.)
