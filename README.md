@@ -29,4 +29,4 @@ any suite without a local report present falls back to its published URL.
 To populate or refresh a suite's local report, run its own `npm test`.
 
 ## License
-[BSD-3-Clause](LICENSE.md) © 2023 Digital Bazaar, Inc.
+[Apache-2.0](LICENSE) © 2026 W3C, Inc. (2023-2026 Digital Bazaar, Inc.)
