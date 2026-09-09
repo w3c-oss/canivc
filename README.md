@@ -63,4 +63,4 @@ someone who can do these same actions in the UI, of course).
 Run either script with `--help` for full usage.
 
 ## License
-[Apache-2.0](LICENSE) © 2026 W3C, Inc. (2023-2026 Digital Bazaar, Inc.)
+[Apache-2.0](LICENSE) © 2026 [World Wide Web Consortium](https://www.w3.org/) (2023-2026 Digital Bazaar, Inc.)
