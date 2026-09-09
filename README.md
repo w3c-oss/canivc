@@ -1,7 +1,8 @@
 # Can I VC?
 
-[canivc.com](https://canivc.com/) is a community dashboard aggregating the
-test suite results of various W3C Verifiable Credentials related test suites.
+> The purpose of [canivc.com](https://canivc.com/) is to support the adoption of W3C Verifiable Credentials
+> technologies through a convenient dashboard that presents test suite result information
+> to the community.
 
 The
 [Can I VC Project](https://github.com/w3c-oss/open-source-program/blob/main/projects/canivc/README.md)
