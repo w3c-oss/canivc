@@ -1,9 +1,6 @@
 ---
 showHero: true
 ---
-<div class="ui basic centered orange message" style="margin-bottom: 1em;">
-  <i class="exclamation circle icon"></i> This is an alpha site and subject to iterative updates.
-</div>
 
 <div class="ui one column grid">
   <div class="column">
