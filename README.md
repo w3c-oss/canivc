@@ -1,8 +1,6 @@
 # Can I VC?
 
-> The purpose of [canivc.com](https://canivc.com/) is to support the adoption of W3C Verifiable Credentials
-> technologies through a convenient dashboard that presents test suite result information
-> to the community.
+[canivc.com](https://canivc.com/) exists to support adoption of W3C Verifiable Credentials technologies through a convenient dashboard that presents test suite results to the community.
 
 The
 [Can I VC Project](https://github.com/w3c-oss/open-source-program/blob/main/projects/canivc/README.md)
