@@ -16,8 +16,8 @@ ctx.forEach(elementCtx => {
 
   // Colors
   const white = '#FFFFFF';
-  const fomanticGreen = 'rgb(0, 181, 173)';
-  const fomanticGreenTransparent = 'rgba(0, 181, 173, 0.2)';
+  const brandTeal = 'rgb(15, 181, 166)';
+  const brandTealTransparent = 'rgba(15, 181, 166, 0.2)';
 
   // Build chart
   new Chart(elementCtx, {
@@ -30,11 +30,11 @@ ctx.forEach(elementCtx => {
           fill: true,
           pointBorderColor: white,
           label: '% of Tests Passed',
-          borderColor: fomanticGreen,
+          borderColor: brandTeal,
           pointHoverBackgroundColor: white,
-          pointBackgroundColor: fomanticGreen,
-          pointHoverBorderColor: fomanticGreen,
-          backgroundColor: fomanticGreenTransparent
+          pointBackgroundColor: brandTeal,
+          pointHoverBorderColor: brandTeal,
+          backgroundColor: brandTealTransparent
         }
       ]
     },

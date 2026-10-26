@@ -16,39 +16,28 @@ eleventyComputed:
     details: report.respecConfig
     showLinks: true %}
 
-<div class="ui two column stackable grid">
-  <div class="column">
-    <div class="ui bulleted list">
+<div class="grid two">
+  <div class="card-box">
+    <h2>Test Matrices</h2>
+    <ul class="link-list">
     {%- for matrix in report.matrices -%}
-      <div class="item">
-        <a href="suites/{{ matrix.title | slugify }}">{{ matrix.title }}</a>
-      </div>
+      <li><a href="suites/{{ matrix.title | slugify }}">{{ matrix.title }}</a></li>
     {%- endfor -%}
-    </div>
+    </ul>
   </div>
 
   {%- assign currentSpec = results.specsImplementedBy | where: 'title', report.respecConfig.title | first -%}
   {%- if currentSpec.implementations.length > 0 -%}
-  <div class="column">
-    <div class="ui segment">
-      <div class="ui fitted secondary menu">
-        <h3 class="header item">
-          Implementations
-        </h3>
-        <div class="right menu">
-          <div class="item">
-            <div class="ui icon buttons">
-              <button id="sortAlphabeltically" class="ui active button" title="Sort Alphabetically">
-                <i class="sort alphabet down icon"></i>
-              </button>
-              <button id="sortByPassPercentage" class="ui button" title="Sort by Percentage Passed">
-                <i class="sort numeric down icon"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+  <div class="card-box">
+    <div class="row between" style="margin-bottom: 1rem">
+      <h2 style="margin: 0">Implementations</h2>
+      <div class="button-group">
+        <button id="sortAlphabeltically" class="button active" title="Sort Alphabetically" aria-label="Sort Alphabetically">A–Z</button>
+        <button id="sortByPassPercentage" class="button" title="Sort by Percentage Passed" aria-label="Sort by Percentage Passed">%</button>
       </div>
-      <table class="ui celled table">
+    </div>
+    <div class="table-wrap">
+      <table id="impl-table">
         {%- for imp in currentSpec.implementations -%}
         <tr>
           <td class="collapsing">
@@ -82,7 +71,7 @@ eleventyComputed:
     });
 
   function sortTable(columnIndex) {
-    const table = document.querySelector('.ui.celled.table');
+    const table = document.getElementById('impl-table');
     const rows = Array.from(table.rows);
 
     rows.sort((a, b) => {

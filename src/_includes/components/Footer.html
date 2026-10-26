@@ -1,30 +1,27 @@
-<div class="ui stackable grid">
-  <div class="eight wide column">
-    <h4 class="ui header">{{ site.title }}...</h4>
+<div class="footer-grid">
+  <div>
+    <h4>{{ site.title }}</h4>
     <p>
       Launched and maintained by the good folks at
       <a href="https://digitalbazaar.com/">Digital Bazaar, Inc.</a>
     </p>
     <p>If you see something wrong, please report bugs on <a href="https://github.com/digitalbazaar/canivc">GitHub</a>.</p>
-    <p>Last generated on <time datetime="{{ lastGenerated }}">{{ lastGenerated }}</time></p>
+    <p class="muted">Last generated on <time datetime="{{ lastGenerated }}">{{ lastGenerated }}</time></p>
   </div>
-  <div class="four wide column">
-    <h4 class="ui header">Site Links</h4>
-    <div class="ui list">
-      <div class="item" style="height: 2em">
-        <a href="/">Home</a>
-      </div>
-      <div class="item" style="height: 2em">
-        <a class="item" href="/reports">Reports</a>
-      </div>
-    </div>
+  <div>
+    <h4>Site Links</h4>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/reports/">Reports</a></li>
+      <li><a href="/implementations/">Implementations</a></li>
+    </ul>
   </div>
-  <div class="four wide column">
-    <h4 class="ui header">Legend</h4>
-    <div class="ui list">
+  <div>
+    <h4>Legend</h4>
+    <ul>
       {% for statusMark in legend %}
-      <div class="item" style="height: 2em">{{ statusMark.icon }} = {{ statusMark.label }}</div>
+      <li>{{ statusMark.icon }} = {{ statusMark.label }}</li>
       {% endfor %}
-    </div>
+    </ul>
   </div>
 </div>

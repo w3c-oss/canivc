@@ -1,13 +1,9 @@
-<div class="ui very padded segment">
-  <h2 style="border-bottom: 2px solid gray; width: fit-content">
-    {{ listTitle }}
-  </h2>
-  <div class="ui bulleted list">
+<div class="card-box">
+  <h2>{{ listTitle }}</h2>
+  <ul class="link-list">
     {% for item in itemList %}
-    <div class="item">
-      <a href="{{ item.link }}">{{ item.text }}</a>, {{ item.subtext }}
-    </div>
+    <li><a href="{{ item.link }}">{{ item.text }}</a>, {{ item.subtext }}</li>
     {% endfor %}
-  </div>
-  <button class="ui button">{{ buttonText }}</button>
+  </ul>
+  <button class="button">{{ buttonText }}</button>
 </div>

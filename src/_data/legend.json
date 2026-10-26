@@ -1,7 +1,7 @@
 [
   {
     "id": "passed",
-    "icon": "<i class=\"large green checkmark icon\"></i>",
+    "icon": "<span class=\"mark-pass\">✓</span>",
     "label": "Passed",
     "color": ""
   },
