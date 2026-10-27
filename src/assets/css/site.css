@@ -168,6 +168,8 @@ a[class]:not(.link):visited { color: inherit; }
 /* Boxes and cards */
 .card-box { padding: clamp(1rem, 3vw, 1.5rem); background: #fff; border: 1px solid var(--twiki-gray); border-radius: var(--radius); }
 .card-box + .card-box { margin-top: 1.5rem; }
+/* Let a box inside a grid cell wrapper match the height of its row */
+.fill > .card-box { height: 100%; }
 .card-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
 .card-head h2 { margin: 0; }
 .card-box > h2:first-child { margin-bottom: 1rem; }
@@ -185,6 +187,7 @@ a[class]:not(.link):visited { color: inherit; }
 .link-list { list-style: none; margin: 0 0 1.25rem; padding: 0; }
 .link-list li { border-bottom: 1px solid var(--twiki-gray); }
 .link-list li:last-child { border-bottom: 0; }
+.link-list.plain li { border-bottom: 0; }
 .link-list a { display: inline-block; padding-block: 0.625rem; }
 .link-list a:not([class]) { text-decoration: underline; }
 .impl-list li[hidden] { display: none; }
