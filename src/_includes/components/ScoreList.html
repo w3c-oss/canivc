@@ -1,9 +1,9 @@
 <div class="card-box">
   <div class="card-head">
     <h2>{{ listTitle }}</h2>
-    {% if tooltip %}
+    {%- if tooltip -%}
     <span class="info" tabindex="0" data-tooltip="{{ tooltip }}" aria-label="{{ tooltip }}">i</span>
-    {% endif %}
+    {%- endif -%}
   </div>
   <ul class="score-list">
     {%- for item in itemList limit:limit -%}
@@ -15,7 +15,7 @@
     </li>
     {%- endfor -%}
   </ul>
-  {% if buttonText %}
+  {%- if buttonText -%}
   <a class="button" href="{{ buttonLink }}">{{ buttonText }}</a>
-  {% endif %}
+  {%- endif -%}
 </div>
