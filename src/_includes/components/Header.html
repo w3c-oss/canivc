@@ -1,13 +1,40 @@
 <nav id="navigation-container" class="nav" aria-label="Main">
   <a href="/" class="brand">{{ site.title }}</a>
-  <a href="/" class="nav-link">Home</a>
-  <a href="/reports/" class="nav-link">Reports</a>
-  <a href="/implementations/" class="nav-link">Implementations</a>
-  <div class="nav-spacer"></div>
-  {% include "components/Search.html" %}
+  <button type="button" class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu" hidden>
+    <span class="nav-toggle-bars" aria-hidden="true"></span>
+  </button>
+  <div id="nav-menu" class="nav-menu">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/reports/" class="nav-link">Reports</a>
+    <a href="/implementations/" class="nav-link">Implementations</a>
+    <div class="nav-spacer"></div>
+    {% include "components/Search.html" %}
+  </div>
 </nav>
 
 <script>
+  // Collapse the menu behind a toggle button on small screens. Without
+  // script the links stay visible.
+  (() => {
+    const nav = document.getElementById("navigation-container");
+    const toggle = nav.querySelector(".nav-toggle");
+    nav.classList.add("has-js");
+    toggle.hidden = false;
+    const setOpen = open => {
+      nav.classList.toggle("open", open);
+      toggle.setAttribute("aria-expanded", String(open));
+    };
+    toggle.addEventListener("click", () => {
+      setOpen(toggle.getAttribute("aria-expanded") !== "true");
+    });
+    nav.addEventListener("keydown", e => {
+      if(e.key === "Escape" && nav.classList.contains("open")) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  })();
+
   // Mark the nav link for the current section as active
   document.addEventListener("DOMContentLoaded", () => {
     const path = window.location.pathname;
