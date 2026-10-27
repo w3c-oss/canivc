@@ -106,7 +106,7 @@ a[class]:not(.link):visited { color: inherit; }
 
 /* Layout */
 .container { max-width: 70rem; margin: 0 auto; padding-inline: 5vw; box-sizing: content-box; }
-.page { min-height: 65vh; padding-block: 1.5rem 3rem; }
+.page { min-height: 65vh; }
 .grid { display: grid; gap: 1.5rem; }
 .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid.one { grid-template-columns: minmax(0, 1fr); }
@@ -167,7 +167,6 @@ a[class]:not(.link):visited { color: inherit; }
 
 /* Boxes and cards */
 .card-box { padding: clamp(1rem, 3vw, 1.5rem); background: #fff; border: 1px solid var(--twiki-gray); border-radius: var(--radius); }
-.card-box + .card-box { margin-top: 1.5rem; }
 /* Let a box inside a grid cell wrapper match the height of its row */
 .fill > .card-box { height: 100%; }
 .card-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem; }
