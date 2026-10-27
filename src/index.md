@@ -10,7 +10,7 @@ showHero: true
 <div class="grid two">
   <div class="card-box">
     <h2>VC WG Test Suites</h2>
-    <ul class="link-list">
+    <ul class="link-list plain">
       {%- assign wg_specs = results.specsByGroup | where: 'group', 'w3c' -%}
       {%- for report in wg_specs -%}
       <li><a href="/reports/{{ report.shortName | slugify }}">{{ report.title }}</a></li>
@@ -19,14 +19,14 @@ showHero: true
   </div>
   <div class="card-box">
     <h2>CCG Test Suites</h2>
-    <ul class="link-list">
+    <ul class="link-list plain">
       {%- assign ccg_specs = results.specsByGroup | where: 'group', 'w3c-ccg' -%}
       {%- for report in ccg_specs -%}
       <li><a href="/reports/{{ report.shortName | slugify }}">{{ report.title }}</a></li>
       {%- endfor -%}
     </ul>
   </div>
-  <div>
+  <div class="fill">
     {%- assign passingIssuers = results.companiesByTestType.Issuer | where_exp: "tests", "tests.passed > 0" -%}
     {%- include "components/ScoreList.html"
       limit: 100
@@ -36,7 +36,7 @@ showHero: true
       tooltip: "Sorted by most tests passed"
       itemList: passingIssuers -%}
   </div>
-  <div>
+  <div class="fill">
     {%- assign passingVerifiers = results.companiesByTestType.Verifier | where_exp: "tests", "tests.passed > 0" -%}
     {%- include "components/ScoreList.html"
       limit: 100
