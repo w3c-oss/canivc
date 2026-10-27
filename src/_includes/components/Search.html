@@ -1,10 +1,10 @@
-<div v-scope class="ui transparent large icon input">
+<div v-scope class="search">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
   <input
-  type="text"
-  id="searchField"
-  v-model="store.searchTerm"
-  @input="store.updateResults"
-  placeholder="Search tests by name..."
-  style="min-width: 275px; margin-bottom: -2px"/>
-  <i class="search icon"></i>
+    type="search"
+    id="searchField"
+    aria-label="Search tests by name"
+    v-model="store.searchTerm"
+    @input="store.updateResults"
+    placeholder="Search tests by name...">
 </div>

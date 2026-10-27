@@ -1,18 +1,18 @@
 ---
 title: Reports
 ---
-<div class="ui very padded segment" style="min-height: 450px">
+<div class="card-box" style="min-height: 450px">
   <h2>{{ title }}</h2>
-  <div class="ui cards">
+  <div class="cards">
   {%- for report in results.all -%}
     <div class="card" onclick="location.href = '{{ report.respecConfig.shortName | slugify }}'">
-      <div class="content">
-        <a class="header" href="{{ report.respecConfig.shortName | slugify }}">{{ report.respecConfig.title }}</a>
+      <div>
+        <a class="title" href="{{ report.respecConfig.shortName | slugify }}">{{ report.respecConfig.title }}</a>
         <span class="description">{{ report.respecConfig.subtitle }}</span>
       </div>
-      <div class="extra content">
+      <div class="extra">
         {% assign specImplementations = results.specsImplementedBy | where: 'title', report.respecConfig.title | first %}
-        <span class="ui blue circular label">{{ specImplementations.implementations | size }}</span> implementations
+        <span class="label count">{{ specImplementations.implementations | size }}</span> implementations
       </div>
     </div>
   {%- endfor -%}

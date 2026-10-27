@@ -1,26 +1,6 @@
-<div class="ui small horizontal divided list">
-  <div class="item">
-    <i class="stop icon item grey"></i>
-    <div class="content">
-      Total: {{ stats.total }}
-    </div>
-  </div>
-  <div class="item">
-    <i class="stop icon item teal"></i>
-    <div class="content">
-      Passing: {{ stats.passed }}
-    </div>
-  </div>
-  <div class="item">
-    <i class="stop icon item yellow"></i>
-    <div class="content">
-      Pending: {{ stats.pending }}
-    </div>
-  </div>
-  <div class="item">
-    <i class="stop icon item red"></i>
-    <div class="content">
-      Failed: {{ stats.failed }}
-    </div>
-  </div>
+<div class="bar-key">
+  <span><span class="swatch"></span>Total: {{ stats.total }}</span>
+  <span><span class="swatch passed"></span>Passing: {{ stats.passed }}</span>
+  <span><span class="swatch pending"></span>Pending: {{ stats.pending }}</span>
+  <span><span class="swatch failed"></span>Failed: {{ stats.failed }}</span>
 </div>

@@ -1,50 +1,51 @@
 ---
 title: Implementations
 ---
-<div class="ui very padded segment" style="min-height: 450px">
-  <h2>{{ title }}</h2>
-  <div data-tooltip="Sorted alphabetically" class="ui top right attached label">
-    <i class="small info icon grey"></i>
+<div class="card-box" style="min-height: 450px">
+  <div class="card-head">
+    <h2>{{ title }}</h2>
+    <span class="info" tabindex="0" data-tooltip="Sorted alphabetically" aria-label="Sorted alphabetically">i</span>
   </div>
-  <div class="ui two columnn grid">
-    <div class="column">
-      <div class="ui large bulleted list" style="margin-top: 0 !important;">
+  <div class="grid two">
+    <div>
+      <ul class="link-list impl-list">
       {%- for imp in implementations -%}
-        <div class="item" data-title="{{ imp[0] }}">
+        <li data-title="{{ imp[0] }}">
+          <span class="item-text">
           {%- assign categories = results.testsByCompany[imp[0]] | keys | sort -%}
           <a href="{{ imp[0] | slugify }}">{{ imp[0] }}</a>
-          {% assign seen = '' %}
-          {% for cat in categories %}
-            {% assign lc = cat | downcase %}
-            {% if lc contains 'issuer' %}
-              {% assign labelName = 'Issuer' %}
-            {% elsif lc contains 'verifier' %}
-              {% assign labelName = 'Verifier' %}
-            {% else %}
-              {% assign labelName = 'Other' %}
-            {% endif %}
-            {% unless seen contains labelName %}
-              <label class="ui basic label">{{ labelName }}</label>
-              {% assign seen = seen | append: labelName | append: '|' %}
-            {% endunless %}
-          {% endfor %}
-        </div>
+          {%- assign seen = '' -%}
+          {%- for cat in categories -%}
+            {%- assign lc = cat | downcase -%}
+            {%- if lc contains 'issuer' -%}
+              {%- assign labelName = 'Issuer' -%}
+            {%- elsif lc contains 'verifier' -%}
+              {%- assign labelName = 'Verifier' -%}
+            {%- else -%}
+              {%- assign labelName = 'Other' -%}
+            {%- endif -%}
+            {%- unless seen contains labelName -%}
+              <span class="label">{{ labelName }}</span>
+              {%- assign seen = seen | append: labelName | append: '|' -%}
+            {%- endunless -%}
+          {%- endfor -%}
+          </span>
+        </li>
       {%- endfor -%}
-      </div>
+      </ul>
     </div>
-    <div class="column" v-scope="store" id="imp-filter">
-      <div class="ui segment">
-        <h4 classs="ui header">Filter by Implemented Specification
-          <button class="ui right floated mini button" @click="clearFilter()">
-            Clear Filter
-          </button>
-        </h4>
-        <div class="ui middle aligned selection list">
-          <div class="item" v-for="spec in store.specs" @click="filterBySpec(spec.title, $el)">
-            <i class="small gray outline circle icon"></i>
-            <div class="content" v-text="spec.title"></div>
-          </div>
+    <div v-scope="store" id="imp-filter">
+      <div class="card-box" style="box-shadow: none">
+        <div class="filter-head">
+          <h4>Filter by Implemented Specification</h4>
+          <button class="button small" @click="clearFilter()">Clear Filter</button>
         </div>
+        <ul class="filter-list">
+          <li class="filter-item" v-for="spec in store.specs" @click="filterBySpec(spec.title, $el)">
+            <span class="dot"></span>
+            <span v-text="spec.title"></span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -57,22 +58,19 @@ title: Implementations
       specs: {{ results.specsImplementedBy | jsonify }}
     },
     clearFilter() {
-      document.querySelectorAll('.ui.selection.list .item').forEach((el) => {
+      document.querySelectorAll('.filter-list .filter-item').forEach((el) => {
         el.classList.remove('active');
-        el.children[0].classList.remove('dot');
       });
-      document.querySelectorAll('.ui.bulleted.list .item').forEach((el) => {
-        el.style.display = 'block';
+      document.querySelectorAll('.impl-list li').forEach((el) => {
+        el.hidden = false;
       });
     },
     setSelected(title) {
-      document.querySelectorAll('.ui.selection.list .item').forEach((el) => {
-        if(el.children[1].innerText === title) {
+      document.querySelectorAll('.filter-list .filter-item').forEach((el) => {
+        if(el.children[1].textContent === title) {
           el.classList.add('active');
-          el.children[0].classList.add('dot');
         } else {
           el.classList.remove('active');
-          el.children[0].classList.remove('dot');
         }
       });
     },
@@ -82,16 +80,14 @@ title: Implementations
         return spec.title === title;
       }).map(spec => spec.implementations).flat();
       // hide all specifications
-      document.querySelectorAll('.ui.bulleted.list .item').forEach((el) => {
-        el.style.display = 'none';
+      document.querySelectorAll('.impl-list li').forEach((el) => {
+        el.hidden = true;
       });
       // show only filtered specifications
-      console.dir(JSON.stringify(filtered))
-      const domFilter = '.ui.bulleted.list .item[data-title="' +
-        filtered.join('"], .ui.bulleted.list .item[data-title="') + '"]';
-      console.log(domFilter)
+      const domFilter = '.impl-list li[data-title="' +
+        filtered.join('"], .impl-list li[data-title="') + '"]';
       document.querySelectorAll(domFilter).forEach((el) => {
-        el.style.display = 'block';
+        el.hidden = false;
       });
       return filtered;
     }

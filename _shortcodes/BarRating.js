@@ -1,13 +1,6 @@
-// Colors pulled from Fomantic-UI's current theme
-const colors = {
-  passed: '#00b5ad', // teal
-  failed: '#db2828', // red
-  pending: '#fbbd08', // yellow
-  background: '#767676' // gray
-};
-
 /**
- * BarRating component displays a bar of test statistics.
+ * BarRating component displays a bar of test statistics. Colors are defined
+ * in `src/assets/css/site.css`.
  *
  * @param {object} stats - Test statistics.
  * @param {number} stats.passed - Number of tests passed.
@@ -23,37 +16,12 @@ function BarRating(stats, width = '100%') {
   const passedWidth = Math.round(passed / total * 100);
   const pendingWidth = Math.round(pending / total * 100);
   const failedWidth = Math.round(failed / total * 100);
-  return `
-    <div
-      style="
-        height: 2em;
-        display: flex;
-        overflow-x: auto;
-        max-width: 375px;
-        border-radius: 3px;
-        width: ${width};
-        background-color: ${colors.background};"
-    >
-      <div
-        style="
-          height: 2em;
-          width: ${passedWidth}%;
-          background-color: ${colors.passed};">
-      </div>
-      <div
-        style="
-          height: 2em;
-          width: ${pendingWidth}%;
-          background-color: ${colors.pending};">
-      </div>
-      <div
-        style="
-          height: 2em;
-          width: ${failedWidth}%;
-          background-color: ${colors.failed};">
-      </div>
-    </div>
-  `;
+  return `<div class="bar" style="width: ${width};"` +
+    ` title="${passed} passed, ${pending} pending, ${failed} failed">` +
+    `<span class="passed" style="width: ${passedWidth}%;"></span>` +
+    `<span class="pending" style="width: ${pendingWidth}%;"></span>` +
+    `<span class="failed" style="width: ${failedWidth}%;"></span>` +
+    `</div>`;
 }
 
 export default BarRating;

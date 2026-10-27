@@ -1,17 +1,23 @@
-<div id="navigation-container" class="ui secondary pointing menu" style="padding-top: 20px;">
-  <a href="/" class="item">Home</a>
-  <a href="/reports/" class="item">Reports</a>
-  <a href="/implementations/" class="item">Implementations</a>
-  <div class="right menu">
-    <div class="item">
-      {% include "components/Search.html" %}
-    </div>
-  </div>
-</div>
+<nav id="navigation-container" class="nav" aria-label="Main">
+  <a href="/" class="brand">{{ site.title }}</a>
+  <a href="/" class="nav-link">Home</a>
+  <a href="/reports/" class="nav-link">Reports</a>
+  <a href="/implementations/" class="nav-link">Implementations</a>
+  <div class="nav-spacer"></div>
+  {% include "components/Search.html" %}
+</nav>
 
 <script>
-  // Set the active class for the anchors inside of the navigation container
+  // Mark the nav link for the current section as active
   document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector(`a[href="${window.location.pathname}"]`).classList.add("active");
-  })
+    const path = window.location.pathname;
+    document.querySelectorAll("#navigation-container .nav-link").forEach(a => {
+      const href = a.getAttribute("href");
+      const active = href === "/" ? path === "/" : path.startsWith(href);
+      if(active) {
+        a.classList.add("active");
+        a.setAttribute("aria-current", "page");
+      }
+    });
+  });
 </script>
