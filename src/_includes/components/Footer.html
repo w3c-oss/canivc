@@ -1,9 +1,12 @@
 <div class="footer-grid">
   <div>
     <h4>{{ site.title }}</h4>
+    <a class="footer-logo" href="https://www.w3.org/">
+      <img src="/assets/images/w3c.svg" alt="W3C" width="72" height="72">
+    </a>
     <p>
-      Launched and maintained by the good folks at
-      <a href="https://digitalbazaar.com/">Digital Bazaar, Inc.</a>
+      {{ site.title }} is a project of the
+      <a href="https://github.com/w3c-oss/open-source-program">W3C Open Source Program</a>.
     </p>
     <p>If you see something wrong, please report bugs on <a href="https://github.com/digitalbazaar/canivc">GitHub</a>.</p>
     <p class="muted">Last generated on <time datetime="{{ lastGenerated }}">{{ lastGenerated }}</time></p>
