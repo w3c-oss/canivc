@@ -8,10 +8,9 @@
   <ul class="score-list">
     {%- for item in itemList limit:limit -%}
     <li class="score-item">
-      <div class="score-name">
-        <a href="/implementations/{{ item.text | slugify }}">{{ item.text }}</a><span class="count">{{ item.passed }} / {{ item.total }}</span>
-      </div>
       {% BarRating item '100%' %}
+      <a class="score-name link" href="/implementations/{{ item.text | slugify }}">{{ item.text }}</a>
+      <span class="count">{{ item.passed }} / {{ item.total }}</span>
     </li>
     {%- endfor -%}
   </ul>
