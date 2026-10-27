@@ -42,16 +42,16 @@
 
 <h2>
   {{ matrix.title }}
-  <a href="{{ matrix.reportDetails.edDraftURI }}#{{ matrix.title | url_encode | replace: '+', '%20' }}"><i class="external icon"></i></a>
+  <a href="{{ matrix.reportDetails.edDraftURI }}#{{ matrix.title | url_encode | replace: '+', '%20' }}" aria-label="View in specification" title="View in specification">↗</a>
 </h2>
 
 <section id="{{ matrix.title | slugify }}">
-  <div>
-    <table class="ui celled structured table">
+  <div class="table-wrap">
+    <table class="matrix">
       <thead>
         <tr>
-          <th rowspan="2" width="20%">{{ matrix.rowLabel }}</th>
-          <th class="center aligned" colspan={{ matrix.columns.length }} >{{ matrix.columnLabel }}</th>
+          <th rowspan="2" style="width: 20%">{{ matrix.rowLabel }}</th>
+          <th colspan={{ matrix.columns.length }} >{{ matrix.columnLabel }}</th>
         </tr>
         <tr>
         {% for column in matrix.columns %}
@@ -63,20 +63,12 @@
       {% for row in matrix.rows %}
         <tr>
           <!--This is the name of the test-->
-          <td>{{ row.id }} {% if row.link %}<a href="{{ row.link }}"><i class="external icon"></i></a>{% endif %}</td>
+          <td>{{ row.id }} {% if row.link %}<a href="{{ row.link }}" aria-label="View test source" title="View test source">↗</a>{% endif %}</td>
           <!--These contain if the test passed, failed, or was skipped-->
           {% for cell in row.cells %}
-            <td class="{{ cell.state | getStatusColors }} {{ cell.optional | getOptional }}">
+            <td class="status {{ cell.state | getStatusColors }} {{ cell.optional | getOptional }}">
             <!-- Add tooltip for errors -->
-              <div {% if cell.err %} data-tooltip="{{ cell.err.message | removeQuotes }}" {% endif %}
-                style="
-                  width: 100%;
-                  display: flex;
-                  min-height: 40px;
-                  align-items: center;
-                  justify-content: center;
-                "
-              >
+              <div class="cell" {% if cell.err %} data-tooltip="{{ cell.err.message | removeQuotes }}" {% endif %}>
                 <div>{{ cell.state | getStatusMark }}</div>
               </div>
             </td>

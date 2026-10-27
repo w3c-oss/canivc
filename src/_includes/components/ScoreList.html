@@ -1,34 +1,21 @@
-<div class="ui very padded segment">
-  <div style="display: flex; align-items: center;">
-    <h2 style="margin-bottom: 0;">{{ listTitle }}</h2>
+<div class="card-box">
+  <div class="card-head">
+    <h2>{{ listTitle }}</h2>
     {% if tooltip %}
-    <div data-tooltip="{{ tooltip }}" class="ui top right attached label">
-      <i class="small info icon grey" style="margin-bottom: 0.5em; margin-left: 0.5em"></i>
-    </div>
+    <span class="info" tabindex="0" data-tooltip="{{ tooltip }}" aria-label="{{ tooltip }}">i</span>
     {% endif %}
   </div>
-  <div class="ui list">
+  <ul class="score-list">
     {%- for item in itemList limit:limit -%}
-    <div class="item" style="line-height: 2em; margin-bottom: 4px">
-      <div style="display: flex; align-items: center;">
-        {% BarRating item '40%' %}
-        <p style="width: 60%; white-space: nowrap; text-overflow: ellipsis; overflow-x: hidden;">
-          <a href="/implementations/{{ item.text | slugify }}" style="margin-left: 8px; font-size: 1em">
-            {{ item.text }},
-          </a> {{ item.passed }} / {{ item.total }}
-        </p>
+    <li class="score-item">
+      <div class="score-name">
+        <a href="/implementations/{{ item.text | slugify }}">{{ item.text }}</a><span class="count">{{ item.passed }} / {{ item.total }}</span>
       </div>
-    </div>
+      {% BarRating item '100%' %}
+    </li>
     {%- endfor -%}
-  </div>
+  </ul>
   {% if buttonText %}
-  <div style="display: flex;">
-    <a
-      class="ui button"
-      href="{{ buttonLink }}"
-      style="min-width: 130px;">
-      {{ buttonText }}
-    </a>
-  </div>
+  <a class="button" href="{{ buttonLink }}">{{ buttonText }}</a>
   {% endif %}
 </div>

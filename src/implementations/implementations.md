@@ -12,34 +12,34 @@ eleventyComputed:
 {% assign info = implementations[vendor] %}
 {% assign testCategories = results.testsByCompany[vendor] %}
 
-<h1 class="ui centered header" style="padding-left: 2.5em">
-  {{ vendor }}
-  <div class="ui simple right floated icon dropdown button">
-    <i class="cogs icon"></i>
-    <div class="left menu">
+<div class="page-title">
+  <h1>{{ vendor }}</h1>
+  <details class="menu-pop">
+    <summary class="button" title="Implementation source files">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+      Source
+    </summary>
+    <div class="pop">
       {%- for group in results.implementersOfSpecs[vendor].groups reversed -%}
-      <a class="item" href="https://github.com/{{ group }}/vc-test-suite-implementations/blob/main/implementations/{{ vendor | replace: ', Inc.', '' | replace: ' ', '' }}.json" target="_blank" rel="noopener">
-        {{ group }}
-      </a>
+      <a href="https://github.com/{{ group }}/vc-test-suite-implementations/blob/main/implementations/{{ vendor | replace: ', Inc.', '' | replace: ' ', '' }}.json" target="_blank" rel="noopener">{{ group }}</a>
       {%- endfor -%}
     </div>
-  </div>
-</h1>
+  </details>
+</div>
 
-<div class="ui very padded segment">
+<div class="card-box">
   <!-- Spider Chart -->
-  <div class="ui one column centered grid">
-    <div class="column">
+  <div class="chart-wrap">
+    <div>
       {% assign chartValues = results.implementersOfSpecs[vendor].specs | map: 'stats.passPercentage' | getPercentages %}
       {% assign chartLabels =  results.implementersOfSpecs[vendor].specs | map: 'title' | json | replace: ' Interoperability Report', '' %}
       <canvas
         class="spider-chart"
-        style="max-height: 400px"
         data-chart-values='{{chartValues}}'
         data-chart-labels='{{chartLabels}}'></canvas>
     </div>
   </div>
-  <div class="ui stackable grid">
+  <div class="stat-grid">
     {%- liquid
         assign issuerResults = results.companiesByTestType['Issuer'] | findObjectByProperty: "text", vendor
         assign verifierResults = results.companiesByTestType['Verifier'] | findObjectByProperty: "text", vendor
@@ -58,69 +58,51 @@ eleventyComputed:
     -%}
 
     {%- if issuerResults.total > 0 %}
-    <div class="{% if definedResultsCount == 1 %}sixteen{% else %}eight{% endif %} wide column">
-      <div class="ui horizontal divider header">
-        <span class="ui small grey italic text">Issuer</span>
-      </div>
-      <div style="display: flex; justify-content: center; margin-bottom: 32px">
-      {%- include "components/BarRatingKey.html" stats: issuerResults -%}
-      </div>
-      <div style="display: flex; justify-content: center">
-      {%- BarRating issuerResults -%}
+    <div{% if definedResultsCount == 1 %} class="full"{% endif %}>
+      <div class="divider-label">Issuer</div>
+      <div class="bar-section">
+              {%- include "components/BarRatingKey.html" stats: issuerResults -%}
+        {%- BarRating issuerResults -%}
       </div>
     </div>
     {%- endif -%}
 
     {%- if verifierResults.total > 0 -%}
-    <div class="{% if definedResultsCount == 1 %}sixteen{% else %}eight{% endif %} wide column">
-      <div class="ui horizontal divider header">
-        <span class="ui small grey italic text">Verifier</span>
-      </div>
-      <div style="display: flex; justify-content: center; margin-bottom: 32px">
-      {%- include "components/BarRatingKey.html" stats: verifierResults -%}
-      </div>
-      <div style="display: flex; justify-content: center">
-      {%- BarRating verifierResults -%}
+    <div{% if definedResultsCount == 1 %} class="full"{% endif %}>
+      <div class="divider-label">Verifier</div>
+      <div class="bar-section">
+              {%- include "components/BarRatingKey.html" stats: verifierResults -%}
+        {%- BarRating verifierResults -%}
       </div>
     </div>
     {%- endif -%}
 
     {%- if implementationResults.total > 0 -%}
-    <div class="{% if definedResultsCount == 1 or definedResultsCount == 3 %}sixteen{% else %}eight{% endif %} wide column">
-      <div class="ui horizontal divider header">
-        <span class="ui small grey italic text">Other</span>
-      </div>
-      <div style="display: flex; justify-content: center; margin-bottom: 32px">
-      {%- include "components/BarRatingKey.html" stats: implementationResults -%}
-      </div>
-      <div style="display: flex; justify-content: center">
-      {%- BarRating implementationResults -%}
+    <div{% if definedResultsCount == 1 or definedResultsCount == 3 %} class="full"{% endif %}>
+      <div class="divider-label">Other</div>
+      <div class="bar-section">
+              {%- include "components/BarRatingKey.html" stats: implementationResults -%}
+        {%- BarRating implementationResults -%}
       </div>
     </div>
     {%- endif -%}
   </div>
 </div>
 
-<h3 class="ui header">Specifcations Tested
+<h2 style="margin-top: 2rem">Specifications Tested
   {%- if results.implementersOfSpecs[vendor].totals %}
-    <span class="sub header" title="Tests Passed / Total Tests">
-      {{ results.implementersOfSpecs[vendor].totals.passed }} tests passed / {{ results.implementersOfSpecs[vendor].totals.total }} total
-    </span>
-  {% endif -%}
-</h3>
-<div class="ui stackable grid">
+  <span class="sub" title="Tests Passed / Total Tests">
+    {{ results.implementersOfSpecs[vendor].totals.passed }} tests passed / {{ results.implementersOfSpecs[vendor].totals.total }} total
+  </span>
+  {%- endif -%}
+</h2>
+<div class="card-box">
   {%- assign specs = results.implementersOfSpecs[vendor].specs -%}
   {%- for spec in specs -%}
-    <div class="row">
-      <div class="seven wide column">
-        <a class="ui medium header" href="/reports/{{spec.shortName | slugify}}">
-          {{ spec.title }}
-        </a>
-      </div>
-      <div class="four wide column">
-        {%- BarRating spec.stats '100%' -%}
-      </div>
-      <div class="two wide column">{{ spec.stats.passed }} / {{ spec.stats.total }}</div>
-    </div>
-  {%- endfor %}
+  <div class="spec-row">
+    <a href="/reports/{{spec.shortName | slugify}}">{{ spec.title }}</a>
+    <div class="bar-cell">{%- BarRating spec.stats '100%' -%}</div>
+    <div class="count">{{ spec.stats.passed }} / {{ spec.stats.total }}</div>
+  </div>
+  {%- endfor -%}
 </div>
