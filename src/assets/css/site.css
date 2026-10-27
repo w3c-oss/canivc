@@ -154,9 +154,9 @@ a[class]:not(.link):visited { color: inherit; }
 .search input:focus { outline: 3px solid var(--yellow); outline-offset: 0; border-color: #000; }
 
 /* Hero */
-.hero { margin: 0 calc(-1 * 5vw) 2.5rem; padding: clamp(2rem, 6vw, 3.75rem) 5vw; background: var(--mist-gray); border-bottom: 1px solid var(--twiki-gray); }
+.hero { margin: 0 calc(-1 * 5vw) 2.5rem; padding: clamp(2rem, 6vw, 3.75rem) 5vw; background: linear-gradient(135deg, #0066cc 0%, #004499 100%); color: #fff; }
 .hero h1 { max-width: 20ch; margin-bottom: 0.75rem; font-size: var(--text-7); }
-.hero p { margin: 0; max-width: 31.5rem; font-size: var(--text-2); color: var(--off-black); }
+.hero p { margin: 0; max-width: 31.5rem; font-size: var(--text-2); }
 @media (min-width: 1244px) { .hero { margin-inline: calc(50% - 50vw); padding-inline: calc(50vw - 35rem); } }
 
 /* Breadcrumbs */
