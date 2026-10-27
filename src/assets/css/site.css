@@ -383,6 +383,8 @@ details[open] > summary { margin-block-end: 1rem; }
 .site-footer { margin-top: 3rem; padding-block: 2rem 1.5625rem; border-top: 1px solid var(--twiki-gray); background: #fff; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; font-size: var(--text-01); }
 @media (max-width: 800px) { .footer-grid { grid-template-columns: minmax(0, 1fr); } }
+.footer-logo { display: inline-block; margin-bottom: 0.75rem; }
+.footer-logo img { width: 4.5rem; height: auto; }
 .footer-grid h4 { margin-bottom: 0.75rem; font-size: var(--text-0); color: var(--off-black); }
 .footer-grid ul { list-style: none; margin: 0; padding: 0; }
 .footer-grid li { padding: 0.25rem 0; }
